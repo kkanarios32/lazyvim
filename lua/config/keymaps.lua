@@ -28,7 +28,7 @@ local function get_next_file_name(dir, prefix)
   local i = 1
   local file_name
   while true do
-    file_name = prefix .. "-" .. i .. ".tex"
+    file_name = prefix .. "-" .. i .. ".anki"
     local full_path = dir .. "/" .. file_name
     if not vim.uv.fs_access(full_path, "R") then
       return file_name
@@ -69,17 +69,16 @@ function create_and_run_file(file_prefix)
 
   -- Run the specified command in the new file
   vim.cmd("Anki Basic")
+  vim.cmd("set ft=tex")
 
   -- Set an autocmd to run the on_save command when the file is saved
   vim.api.nvim_create_autocmd("BufWritePost", {
     pattern = new_file,
     callback = function()
       vim.cmd("AnkiSend")
+      vim.cmd("edit " .. current_file)
     end,
   })
-
-  -- Return to the original file
-  vim.cmd("edit " .. current_file)
 end
 
 vim.keymap.set("n", "<leader>mn", function()
