@@ -1,8 +1,22 @@
 return {
-  {
-    "nvim-cmp",
-    opts = function(_, opts)
-      table.insert(opts.sources, { name = "snippets" })
-    end,
+  "hrsh7th/nvim-cmp",
+  dependencies = {
+    "garymjr/nvim-snippets",
+    opts = {
+      friendly_snippets = true,
+    },
+    dependencies = {
+      { "rafamadriz/friendly-snippets" },
+    },
   },
+  opts = function(_, opts)
+    opts.snippet = {
+      expand = function(item)
+        return LazyVim.cmp.expand(item.body)
+      end,
+    }
+    if LazyVim.has("nvim-snippets") then
+      table.insert(opts.sources, { name = "snippets" })
+    end
+  end,
 }

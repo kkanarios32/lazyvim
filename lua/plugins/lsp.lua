@@ -100,7 +100,7 @@ local opts = function()
       },
       clangd = {
         cmd = {
-          "clangd-12",
+          "clangd-18",
           "--background-index",
           "--suggest-missing-includes",
           "--clang-tidy",
