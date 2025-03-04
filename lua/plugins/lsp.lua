@@ -42,7 +42,7 @@ local opts = function()
     -- Be aware that you also will need to properly configure your LSP server to
     -- provide the code lenses.
     codelens = {
-      enabled = false,
+      enabled = true,
     },
     -- Enable lsp cursor word highlighting
     document_highlight = {

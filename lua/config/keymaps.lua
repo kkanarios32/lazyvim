@@ -90,7 +90,6 @@ end)
 -- Add any additional keymaps here
 -- Move to window using the <ctrl> hjkl keys
 
-local Util = require("lazyvim.util")
 local function map(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
   ---@cast keys LazyKeysHandler
@@ -106,3 +105,29 @@ map("n", "<C-h>", "<cmd>lua require'tmux'.move_left()<cr>", { desc = "Go to left
 map("n", "<C-j>", "<cmd>lua require'tmux'.move_bottom()<cr>", { desc = "Go to lower window" })
 map("n", "<C-k>", "<cmd>lua require'tmux'.move_top()<cr>", { desc = "Go to upper window" })
 map("n", "<C-l>", "<cmd>lua require'tmux'.move_right()<cr>", { desc = "Go to right window" })
+
+-- local Job = require("plenary.job")
+-- local function template(pfx, tmpl_addr, dest, config)
+--   Job:new({
+--     command = "forester",
+--     args = {
+--       "new",
+--       "--prefix",
+--       pfx,
+--       "--dest",
+--       dest("--template"),
+--       tmpl_addr,
+--       config,
+--     },
+--
+--     on_exit = vim.schedule_wrap(function(res)
+--       vim.schedule(function()
+--         vim.cmd("edit " .. res:result()[1])
+--       end)
+--     end),
+--     on_stderr = function(error, data)
+--       vim.print(vim.inspect(error))
+--       vim.print(vim.inspect(data))
+--     end,
+--   }):sync()
+-- end

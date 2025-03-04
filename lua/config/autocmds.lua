@@ -15,6 +15,7 @@ local function replace_math_delimiters()
 
     -- Then replace single dollar signs ($x$)
     new_line = new_line:gsub("%$(.-)%$", "#{%1}")
+    new_line = new_line:gsub("\\|(.-)\\|", "||%1||")
 
     -- Check if the line was modified
     if new_line ~= line then
